@@ -1,7 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import '../services/api_service.dart'; // ✅ استدعاء ملف API
 import 'signin_screen.dart'; // عشان الانتقال بعد النجاح
+=======
+import 'package:http/http.dart' as http;
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -20,6 +24,10 @@ class SignupScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+<<<<<<< HEAD
+=======
+                    const SizedBox(height: 0),
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
                     Image.asset(
                       'assets/images/signup_illustration.png',
                       height: 180,
@@ -45,7 +53,13 @@ class SignupScreen extends StatelessWidget {
                 const Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(top: 80.0),
+<<<<<<< HEAD
                     child: Center(child: SignupForm()),
+=======
+                    child: Center(
+                      child: SignupForm(),
+                    ),
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
                   ),
                 ),
               ],
@@ -67,6 +81,10 @@ class _SignupFormState extends State<SignupForm> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+<<<<<<< HEAD
+=======
+  // 🧩 دالة التسجيل
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
   Future<void> registerUser() async {
     final firstName = firstNameController.text.trim();
     final lastName = lastNameController.text.trim();
@@ -83,10 +101,22 @@ class _SignupFormState extends State<SignupForm> {
     final fullName = "$firstName $lastName";
 
     try {
+<<<<<<< HEAD
       final response = await ApiService.signUp(
         fullName: fullName,
         email: email,
         password: password,
+=======
+      final url = Uri.parse('http://10.0.2.2:5000/api/users/signup'); // للمحاكي
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'full_name': fullName,
+          'email': email,
+          'password': password,
+        }),
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
       );
 
       if (response.statusCode == 201) {
@@ -95,10 +125,15 @@ class _SignupFormState extends State<SignupForm> {
           SnackBar(content: Text(data['message'] ?? 'Account created ✅')),
         );
 
+<<<<<<< HEAD
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => const SigninScreen()),
         );
+=======
+        // ✅ بعد النجاح، الانتقال لصفحة تسجيل الدخول
+        Navigator.pushReplacementNamed(context, '/signin');
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
       } else {
         final error = jsonDecode(response.body);
         ScaffoldMessenger.of(context).showSnackBar(
@@ -153,16 +188,32 @@ class _SignupFormState extends State<SignupForm> {
 
           const SizedBox(height: 15),
 
+<<<<<<< HEAD
+=======
+          // الإيميل
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
           TextField(
             controller: emailController,
             decoration: const InputDecoration(
               labelText: 'Email Address',
               hintText: 'Please enter your university email',
+<<<<<<< HEAD
+=======
+              hintStyle: TextStyle(
+                color: Colors.grey,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
             ),
           ),
 
           const SizedBox(height: 15),
 
+<<<<<<< HEAD
+=======
+          // كلمة المرور
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
           TextField(
             controller: passwordController,
             obscureText: true,
@@ -174,6 +225,10 @@ class _SignupFormState extends State<SignupForm> {
 
           const SizedBox(height: 20),
 
+<<<<<<< HEAD
+=======
+          // زر التسجيل
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
           ElevatedButton(
             onPressed: registerUser,
             style: ElevatedButton.styleFrom(
@@ -185,22 +240,34 @@ class _SignupFormState extends State<SignupForm> {
 
           const SizedBox(height: 18),
 
+<<<<<<< HEAD
+=======
+          // لديك حساب مسبقاً؟
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("Already have an account? "),
               GestureDetector(
                 onTap: () {
+<<<<<<< HEAD
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (_) => const SigninScreen()),
                   );
+=======
+                  Navigator.pushReplacementNamed(context, '/signin');
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
                 },
                 child: const Text(
                   'Sign In',
                   style: TextStyle(color: Colors.deepPurple),
                 ),
+<<<<<<< HEAD
               ),
+=======
+              )
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
             ],
           ),
         ],

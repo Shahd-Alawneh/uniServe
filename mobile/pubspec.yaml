@@ -25,4 +25,7 @@ flutter:
 
   assets:
     - assets/images/signup_illustration.png
+<<<<<<< HEAD
     - assets/images/welcome.jpg
+=======
+>>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
