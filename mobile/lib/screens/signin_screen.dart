@@ -1,10 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../services/api_service.dart'; // ✅ استيراد ملف الاتصال بالسيرفر
-=======
-import 'package:http/http.dart' as http;
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
 import 'reset_password.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -36,20 +32,9 @@ class _SigninScreenState extends State<SigninScreen> {
     setState(() => isLoading = true);
 
     try {
-<<<<<<< HEAD
       // ✅ استدعاء الدالة من api_service.dart
       final response = await ApiService.signIn(email: email, password: password);
 
-=======
-      final url = Uri.parse('http://10.0.2.2:5000/api/users/signIn');
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'email': email, 'password': password}),
-      );
-
-      // ✅ حالة النجاح
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
 
@@ -60,11 +45,7 @@ class _SigninScreenState extends State<SigninScreen> {
           ),
         );
 
-<<<<<<< HEAD
         // تنظيف الحقول
-=======
-        // تفريغ الحقول
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
         emailController.clear();
         passwordController.clear();
 
@@ -73,13 +54,7 @@ class _SigninScreenState extends State<SigninScreen> {
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
-<<<<<<< HEAD
       } else {
-=======
-
-      } else {
-        // ❌ فشل تسجيل الدخول
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
         final error = jsonDecode(response.body);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -89,16 +64,9 @@ class _SigninScreenState extends State<SigninScreen> {
         );
       }
     } catch (e) {
-<<<<<<< HEAD
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Connection error: $e'),
-=======
-      // ⚠️ خطأ في الاتصال بالسيرفر
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Connection error: ${e.toString()}'),
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
           backgroundColor: Colors.orangeAccent,
         ),
       );
@@ -117,41 +85,22 @@ class _SigninScreenState extends State<SigninScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-<<<<<<< HEAD
               // صورة تسجيل الدخول
               Image.asset('assets/images/login.png', height: 160),
 
               const SizedBox(height: 20),
-=======
-              // 🔹 صورة الشاشة
-              Image.asset('assets/images/login.png', height: 160),
-
-              const SizedBox(height: 20),
-
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
               const Text(
                 "Welcome Back 👋",
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
-<<<<<<< HEAD
-=======
-
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
               const Text(
                 "Please log in to your account",
                 style: TextStyle(color: Colors.grey),
               ),
-<<<<<<< HEAD
               const SizedBox(height: 30),
 
               // حقل الإيميل
-=======
-
-              const SizedBox(height: 30),
-
-              // 📧 حقل الإيميل
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -161,16 +110,9 @@ class _SigninScreenState extends State<SigninScreen> {
                   border: OutlineInputBorder(),
                 ),
               ),
-<<<<<<< HEAD
               const SizedBox(height: 15),
 
               // حقل كلمة المرور
-=======
-
-              const SizedBox(height: 15),
-
-              // 🔒 حقل كلمة المرور
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
               TextField(
                 controller: passwordController,
                 obscureText: !showPassword,
@@ -182,21 +124,11 @@ class _SigninScreenState extends State<SigninScreen> {
                     icon: Icon(
                         showPassword ? Icons.visibility_off : Icons.visibility),
                     onPressed: () {
-<<<<<<< HEAD
                       setState(() => showPassword = !showPassword);
-=======
-                      setState(() {
-                        showPassword = !showPassword;
-                      });
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
                     },
                   ),
                 ),
               ),
-<<<<<<< HEAD
-=======
-
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
               const SizedBox(height: 10),
 
               // Forgot Password
@@ -207,12 +139,8 @@ class _SigninScreenState extends State<SigninScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-<<<<<<< HEAD
                         builder: (context) => const ResetPasswordScreen(),
                       ),
-=======
-                          builder: (context) => const ResetPasswordScreen()),
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
                     );
                   },
                   child: const Text(
@@ -221,28 +149,17 @@ class _SigninScreenState extends State<SigninScreen> {
                   ),
                 ),
               ),
-<<<<<<< HEAD
               const SizedBox(height: 10),
 
               // زر تسجيل الدخول
-=======
-
-              const SizedBox(height: 10),
-
-              // 🔘 زر تسجيل الدخول
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
               ElevatedButton(
                 onPressed: isLoading ? null : loginUser,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple,
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
-<<<<<<< HEAD
                     borderRadius: BorderRadius.circular(8),
                   ),
-=======
-                      borderRadius: BorderRadius.circular(8)),
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
                 ),
                 child: isLoading
                     ? const CircularProgressIndicator(color: Colors.white)
@@ -251,16 +168,9 @@ class _SigninScreenState extends State<SigninScreen> {
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
               ),
-<<<<<<< HEAD
               const SizedBox(height: 20),
 
               // رابط التسجيل
-=======
-
-              const SizedBox(height: 20),
-
-              // 🔹 رابط الانتقال لصفحة التسجيل
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

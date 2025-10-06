@@ -9,6 +9,7 @@ class ApiService {
     required String fullName,
     required String email,
     required String password,
+     required String role,
   }) async {
     final url = Uri.parse('$baseUrl/signup');
     return await http.post(
@@ -18,6 +19,7 @@ class ApiService {
         'full_name': fullName,
         'email': email,
         'password': password,
+        "role": role,
       }),
     );
   }

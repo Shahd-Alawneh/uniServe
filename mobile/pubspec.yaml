@@ -11,13 +11,13 @@ dependencies:
   flutter:
     sdk: flutter
 
+  image_picker: ^1.0.4
   http: ^1.1.0
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^2.0.0
 
 flutter:
@@ -25,7 +25,4 @@ flutter:
 
   assets:
     - assets/images/signup_illustration.png
-<<<<<<< HEAD
     - assets/images/welcome.jpg
-=======
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f

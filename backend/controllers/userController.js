@@ -17,14 +17,25 @@ exports.registerUser = async (req, res) => {
       return res.status(400).json({ message: "All fields are required ❌" });
 
     // ✅ استخراج رقم الطالب
-    let student_id = null;
-    if (email.includes("@stu.najah.edu") && email.startsWith("s")) {
-      student_id = email.slice(1, email.indexOf("@"));
-    }
-    if (!student_id)
-      return res
-        .status(400)
-        .json({ message: "Invalid university email format ❌" });
+   // ✅ استخراج رقم الطالب فقط إذا كان الدور طالب
+// ✅ استخراج رقم الطالب فقط إذا كان الطالب
+let student_id = null;
+
+if (role === "student") {
+  if (email.includes("@stu.najah.edu") && email.startsWith("s")) {
+    student_id = email.slice(1, email.indexOf("@"));
+  } else {
+    return res
+      .status(400)
+      .json({ message: "Invalid university email format ❌" });
+  }
+} else {
+  // الدكتور ما عنده student_id
+  student_id = null;
+}
+
+
+
 
     // ✅ التحقق من وجود المستخدم
     User.findByEmail(email, async (err, results) => {
@@ -43,16 +54,16 @@ exports.registerUser = async (req, res) => {
         student_id,
         email,
         hashedPassword,
-        role || "student",
+        role ,
         (err2) => {
           if (err2) {
-            console.error(err2);
+            console.error("❌ MySQL Insert Error:", err2);
             return res.status(500).json({ message: "Error registering user ❌" });
           }
 
           return res.status(201).json({
             message: "Account created successfully ✅",
-            data: { full_name, student_id, email, role: role || "student" },
+            data: { full_name, student_id, email, role: role },
           });
         }
       );

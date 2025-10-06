@@ -1,10 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../services/api_service.dart'; // ✅ استدعاء ملف الـ API
-=======
-import 'package:http/http.dart' as http;
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -22,13 +18,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   bool isLoading = false;
   bool codeSent = false;
 
-<<<<<<< HEAD
   // ✅ إرسال كود التحقق إلى الإيميل
-=======
-  // عدّلي هذا العنوان إذا لازم
-  final String baseUrl = 'http://10.0.2.2:5000/api/users';
-
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
   Future<void> sendResetCode() async {
     final email = emailController.text.trim();
     if (email.isEmpty) {
@@ -38,7 +28,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
     setState(() => isLoading = true);
     try {
-<<<<<<< HEAD
       final response = await ApiService.sendResetCode(email: email);
       final body = jsonDecode(response.body);
 
@@ -46,19 +35,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         showSnack(body['message'] ?? 'Reset code sent to your email');
         setState(() => codeSent = true);
       } else {
-=======
-      final url = Uri.parse('$baseUrl/forgot-password');
-      final resp = await http.post(url,
-          headers: {'Content-Type': 'application/json'},
-          body: jsonEncode({'email': email}));
-
-      if (resp.statusCode == 200) {
-        final body = jsonDecode(resp.body);
-        showSnack(body['message'] ?? 'Reset code sent to your email');
-        setState(() => codeSent = true);
-      } else {
-        final body = jsonDecode(resp.body);
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
         showSnack(body['message'] ?? 'Failed to send reset code');
       }
     } catch (e) {
@@ -68,10 +44,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     }
   }
 
-<<<<<<< HEAD
   // ✅ إعادة تعيين كلمة المرور
-=======
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
   Future<void> resetPassword() async {
     final email = emailController.text.trim();
     final code = codeController.text.trim();
@@ -93,7 +66,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
     setState(() => isLoading = true);
     try {
-<<<<<<< HEAD
       final response = await ApiService.resetPassword(
         email: email,
         code: code,
@@ -104,31 +76,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
       if (response.statusCode == 200) {
         showSnack(body['message'] ?? 'Password reset successful ✅');
-=======
-      final url = Uri.parse('$baseUrl/reset-password');
-      final resp = await http.post(url,
-          headers: {'Content-Type': 'application/json'},
-          body: jsonEncode({
-            'email': email,
-            'code': code,
-            'newPassword': pass,
-          }));
-
-      if (resp.statusCode == 200) {
-        final body = jsonDecode(resp.body);
-        showSnack(body['message'] ?? 'Password reset successful');
-        // بعد نجاح الريست، نرجع لصفحة الـ SignIn
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
         Future.delayed(const Duration(seconds: 1), () {
           Navigator.pushReplacementNamed(context, '/signin');
         });
       } else {
-<<<<<<< HEAD
         showSnack(body['message'] ?? 'Reset failed ❌');
-=======
-        final body = jsonDecode(resp.body);
-        showSnack(body['message'] ?? 'Reset failed');
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
       }
     } catch (e) {
       showSnack('Connection error: $e');
@@ -177,26 +129,18 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               child: ElevatedButton(
                 onPressed: isLoading ? null : sendResetCode,
                 child: isLoading
-<<<<<<< HEAD
                     ? const SizedBox(
                         height: 18,
                         width: 18,
                         child: CircularProgressIndicator(
                             color: Colors.white, strokeWidth: 2),
                       )
-=======
-                    ? const SizedBox(height: 18, width: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
                     : Text(codeSent ? 'Resend Code' : 'Send Verification Code'),
               ),
             ),
             const SizedBox(height: 18),
 
-<<<<<<< HEAD
             // لو الكود اتبعت، بنظهر الحقول التالية
-=======
-            // لو الكود اتبعت، نبين الحقول التالية
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
             if (codeSent) ...[
               TextField(
                 controller: codeController,
@@ -229,16 +173,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 child: ElevatedButton(
                   onPressed: isLoading ? null : resetPassword,
                   child: isLoading
-<<<<<<< HEAD
                       ? const SizedBox(
                           height: 18,
                           width: 18,
                           child: CircularProgressIndicator(
                               color: Colors.white, strokeWidth: 2),
                         )
-=======
-                      ? const SizedBox(height: 18, width: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
->>>>>>> 6e5706d374dcc1f382712f0320126ff8d193055f
                       : const Text('Reset Password'),
                 ),
               ),
